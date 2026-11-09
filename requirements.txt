@@ -1,0 +1,10 @@
+certstream==1.12
+numpy==2.0.2
+pandas==2.3.3
+pyarrow==21.0.0
+python-dateutil==3.0.0
+pytz==2026.6
+six==1.17.0
+termcolor==3.1.0
+tzdata==2026.6
+websocket-client==1.9.0

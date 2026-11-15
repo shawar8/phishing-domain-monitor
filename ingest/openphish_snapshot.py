@@ -1,9 +1,11 @@
+from datetime import UTC, datetime
+from pathlib import Path
+
+import pandas as pd
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
-import pandas as pd
-from pathlib import Path
-from datetime import datetime, timezone
+
 from ingest.paths import DATA_ROOT
 
 
@@ -87,7 +89,7 @@ def save_csv(df: pd.DataFrame, text_output: Path):
 def main():
 
     data_folder = DATA_ROOT / "raw" / "openphish"
-    run_ts = datetime.now(timezone.utc)
+    run_ts = datetime.now(UTC)
     day = run_ts.strftime("%Y-%m-%d")
     stem = f"feed-{run_ts:%H%M%S}Z"
 

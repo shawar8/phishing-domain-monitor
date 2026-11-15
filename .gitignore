@@ -227,3 +227,6 @@ data/
 
 # Logs
 logs/
+
+# Local setup notes
+ingest/scheduling_setup.md

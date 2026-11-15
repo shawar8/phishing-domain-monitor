@@ -1,0 +1,6 @@
+-r requirements.txt
+ipykernel==7.4.0
+matplotlib==3.11.2
+matplotlib-inline==0.2.2
+seaborn==0.13.2
+pytest==9.2.0

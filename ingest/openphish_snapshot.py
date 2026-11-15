@@ -1,3 +1,4 @@
+import logging
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -7,6 +8,8 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
 from ingest.paths import DATA_ROOT
+
+log = logging.getLogger(__name__)
 
 
 def fetch_openphish_feed(url: str) -> str:
@@ -72,7 +75,7 @@ def process_feed(text: str, run_ts: datetime):
 def validate_feed(df: pd.DataFrame, rejected: int):
 
     n = df.shape[0]
-    print(f"Total rows: {n}, Rejected rows: {rejected}")
+    log.info(f"Total rows: {n}, Rejected rows: {rejected}")
     if n < 50 or rejected > 0.05 * (n + rejected):
         raise RuntimeError(
             f"Too few rows or too many rejected rows: {n} rows, {rejected} rejected"
@@ -83,10 +86,14 @@ def save_csv(df: pd.DataFrame, text_output: Path):
 
     csv_output = text_output.with_suffix(".csv")
     df.to_csv(csv_output, index=False, encoding="utf-8")
-    print(f"CSV output written to {csv_output}")
+    log.info(f"CSV output written to {csv_output}")
 
 
 def main():
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+    )
 
     data_folder = DATA_ROOT / "raw" / "openphish"
     run_ts = datetime.now(UTC)

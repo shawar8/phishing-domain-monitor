@@ -9,7 +9,7 @@ from urllib3.util.retry import Retry
 
 from ingest.paths import DATA_ROOT
 
-log = logging.getLogger(__name__)
+log = logging.getLogger("ingest.openphish_snapshot")
 
 
 def fetch_openphish_feed(url: str) -> str:
